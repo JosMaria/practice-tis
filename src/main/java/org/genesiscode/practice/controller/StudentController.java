@@ -1,21 +1,24 @@
 package org.genesiscode.practice.controller;
 
 import org.genesiscode.practice.entity.Student;
-import org.springframework.web.bind.annotation.*;
+import org.genesiscode.practice.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/student")
 public class StudentController {
 
-    private final static List<Student> STUDENT = List.of(
-            new Student(1L, "Jose Maria", "Aguilar Chambi", LocalDate.now()),
-            new Student(2L, "Cidar", "Parra Merida", LocalDate.of(1998, Month.JANUARY, 17)),
-            new Student(3L, "Diego", "Placido", LocalDate.of(2001, Month.APRIL, 17)),
-            new Student(4L, "Carlos", "Torrico", LocalDate.of(2010, Month.DECEMBER, 25)));
+    private final StudentService studentService;
+
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping(path = "say/hello")
     public String sayHelloWorld() {
@@ -29,7 +32,7 @@ public class StudentController {
 
     @GetMapping
     public List<Student> getStudents() {
-        return STUDENT;
+        return studentService.getStudents();
     }
 
 }

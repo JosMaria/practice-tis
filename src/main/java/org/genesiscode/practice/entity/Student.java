@@ -1,18 +1,29 @@
 package org.genesiscode.practice.entity;
 
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "students")
 public class Student {
 
+    @Id
     private Long id;
+
+    @Column(name = "my_name", nullable = false)
     private String name;
     private String lastName;
-    private LocalDate birth;
-    public Student(Long id, String name, String lastName, LocalDate birth) {
+    //private LocalDate birth;
+
+    public Student(Long id, String name, String lastName) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
-        this.birth = birth;
+    }
+
+    public Student() {
     }
 
     public Long getId() {
@@ -24,9 +35,9 @@ public class Student {
     public String getLastName() {
         return lastName;
     }
-    public LocalDate getBirth() {
+    /*public LocalDate getBirth() {
         return birth;
-    }
+    }*/
 
     public void setId(Long id) {
         this.id = id;
@@ -40,7 +51,7 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public void setBirth(LocalDate birth) {
-        this.birth = birth;
-    }
+    //public void setBirth(LocalDate birth) {
+    //    this.birth = birth;
+    //}
 }
